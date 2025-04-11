@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VidShare - Home</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">VidShare</div>
+    <div class="search">
+      <input type="text" id="searchInput" placeholder="Search videos...">
+      <button id="searchBtn">Search</button>
+    </div>
+    <nav id="navMenu">
+      <!-- Dynamically populated based on auth status -->
+    </nav>
+  </header>
+
+  <main>
+    <h1>Latest Videos</h1>
+    <div id="videoGrid" class="video-grid">
+      <!-- Videos will be loaded here -->
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 VidShare - Cloud Native Video Sharing Platform</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      updateNavMenu();
+      loadVideos();
+      
+      // Search functionality
+      document.getElementById('searchBtn').addEventListener('click', () => {
+        const query = document.getElementById('searchInput').value;
+        searchVideos(query);
+      });
+    });
+  </script>
+</body>
+</html>

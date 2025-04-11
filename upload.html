@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VidShare - Upload Video</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">VidShare</div>
+    <nav id="navMenu">
+      <!-- Dynamically populated based on auth status -->
+    </nav>
+  </header>
+
+  <main>
+    <div class="upload-container">
+      <h1>Upload Video</h1>
+      <form id="uploadForm">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+          <label for="publisher">Publisher</label>
+          <input type="text" id="publisher" name="publisher">
+        </div>
+        <div class="form-group">
+          <label for="producer">Producer</label>
+          <input type="text" id="producer" name="producer">
+        </div>
+        <div class="form-group">
+          <label for="genre">Genre</label>
+          <select id="genre" name="genre">
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Documentary">Documentary</option>
+            <option value="Horror">Horror</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ageRating">Age Rating</label>
+          <select id="ageRating" name="ageRating">
+            <option value="U">U</option>
+            <option value="PG">PG</option>
+            <option value="12">12</option>
+            <option value="15">15</option>
+            <option value="18">18</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="videoFile">Video File</label>
+          <input type="file" id="videoFile" name="videoFile" accept="video/*" required>
+        </div>
+        <div class="form-group">
+          <button type="submit">Upload</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 VidShare - Cloud Native Video Sharing Platform</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      updateNavMenu();
+      
+      // Check if user is a creator
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      if (user.role !== 'creator') {
+        alert('Only creators can upload videos');
+        window.location.href = 'index.html';
+      }
+      
+      document.getElementById('uploadForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        formData.append('title', document.getElementById('title').value);
+        formData.append('publisher', document.getElementById('publisher').value);
+        formData.append('producer', document.getElementById('producer').value);
+        formData.append('genre', document.getElementById('genre').value);
+        formData.append('ageRating', document.getElementById('ageRating').value);
+        formData.append('videoFile', document.getElementById('videoFile').files[0]);
+        
+        uploadVideo(formData);
+      });
+    });
+  </script>
+</body>
+</html>

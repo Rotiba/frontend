@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VidShare - Video Player</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">VidShare</div>
+    <nav id="navMenu">
+      <!-- Dynamically populated based on auth status -->
+    </nav>
+  </header>
+
+  <main>
+    <div class="video-container">
+      <h1 id="videoTitle">Loading...</h1>
+      <div class="video-player">
+        <video id="videoPlayer" controls>
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="video-info">
+        <div class="video-meta">
+          <p><strong>Publisher:</strong> <span id="videoPublisher"></span></p>
+          <p><strong>Producer:</strong> <span id="videoProducer"></span></p>
+          <p><strong>Genre:</strong> <span id="videoGenre"></span></p>
+          <p><strong>Age Rating:</strong> <span id="videoAgeRating"></span></p>
+          <p><strong>Uploaded by:</strong> <span id="videoUploader"></span></p>
+          <p><strong>Upload Date:</strong> <span id="videoUploadDate"></span></p>
+        </div>
+        <div class="video-rating">
+          <h3>Rate this video:</h3>
+          <div class="rating-stars" id="ratingStars">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+          </div>
+          <p><span id="averageRating">0</span>/5 (<span id="ratingCount">0</span> ratings)</p>
+        </div>
+      </div>
+      
+      <div class="comments-section">
+        <h2>Comments</h2>
+        <div id="commentForm" class="comment-form">
+          <textarea id="commentText" placeholder="Write a comment..."></textarea>
+          <button id="submitComment">Submit</button>
+        </div>
+        <div id="commentsList" class="comments-list">
+          <!-- Comments will be loaded here -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 VidShare - Cloud Native Video Sharing Platform</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      updateNavMenu();
+      
+      // Get video ID from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const videoId = urlParams.get('id');
+      
+      if (!videoId) {
+        alert('Video ID is missing');
+        window.location.href = 'index.html';
+        return;
+      }
+      
+      // Load video details
+      loadVideoDetails(videoId);
+      
+      // Setup rating stars
+      document.querySelectorAll('.star').forEach(star => {
+        star.addEventListener('click', () => {
+          const rating = parseInt(star.getAttribute('data-value'));
+          submitRating(videoId, rating);
+        });
+
+        // Hover effect
+        star.addEventListener('mouseover', () => {
+          const rating = parseInt(star.getAttribute('data-value'));
+          document.querySelectorAll('.star').forEach((s, index) => {
+            if (index < rating) {
+              s.classList.add('active');
+            } else {
+              s.classList.remove('active');
+            }
+          });
+        });
+
+        star.addEventListener('mouseout', () => {
+          document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
+        });
+      });
+    });
+  </script>
+</body>
+</html>
