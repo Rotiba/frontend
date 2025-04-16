@@ -1,5 +1,7 @@
 // Base URL for the API
-const API_URL = "http://localhost:3000/api";
+const API_URL =
+  "https://assignbackend-gycvg7bebtfdekg9.canadacentral-01.azurewebsites.net/api";
+//const API_URL = "localhost:3000/api/";
 // Load all videos for home page
 async function loadVideos() {
   try {

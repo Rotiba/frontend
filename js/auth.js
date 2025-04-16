@@ -1,10 +1,13 @@
 // Base URL for the API
-const API_BASE_URL = "http://localhost:3000/api";
+const API_BASE_URL =
+  "https://assignbackend-gycvg7bebtfdekg9.canadacentral-01.azurewebsites.net/api";
+
+//const API_BASE_URL = "localhost:3000/api/";
 
 // Function to log in a user
 async function login(username, password) {
   try {
-    const response = await fetch(`${API_BASE_URL}/login`, {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +35,7 @@ async function login(username, password) {
 // Function to register a new user
 async function register(username, password) {
   try {
-    const response = await fetch(`${API_BASE_URL}/register`, {
+    const response = await fetch(`${API_BASE_URL}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
