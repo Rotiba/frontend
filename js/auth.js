@@ -2,7 +2,7 @@
 const API_BASE_URL =
   "https://assignbackend-gycvg7bebtfdekg9.canadacentral-01.azurewebsites.net/api";
 
-//const API_BASE_URL = "localhost:3000/api/";
+//const API_BASE_URL = "http://localhost:3000/api";
 
 // Function to log in a user
 async function login(username, password) {

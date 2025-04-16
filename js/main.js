@@ -1,7 +1,7 @@
 // Base URL for the API
 const API_URL =
   "https://assignbackend-gycvg7bebtfdekg9.canadacentral-01.azurewebsites.net/api";
-//const API_URL = "localhost:3000/api/";
+//const API_URL = "http://localhost:3000/api";
 // Load all videos for home page
 async function loadVideos() {
   try {
@@ -39,7 +39,7 @@ function displayVideos(videos) {
     videoCard.innerHTML = `
         <div class="video-thumbnail">
           <a href="video.html?id=${video.id}">
-            <img src="/placeholder-thumbnail.jpg" alt="${video.title}" />
+            <img src="images/placeholder-thumbnail.jpg" alt="${video.title}" />
             <div class="video-duration">Video</div>
           </a>
         </div>
@@ -208,6 +208,12 @@ function displayComments(comments) {
 
     commentsList.appendChild(commentEl);
   });
+}
+
+// Function to check if the user is logged in
+function isLoggedIn() {
+  const token = localStorage.getItem("token");
+  return !!token; // Returns true if a token exists, false otherwise
 }
 
 // Function to get the Authorization header
