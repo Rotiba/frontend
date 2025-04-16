@@ -37,9 +37,12 @@ function displayVideos(videos) {
     videoCard.className = "video-card";
 
     videoCard.innerHTML = `
-        <div class="video-thumbnail">
+        <div class="col-md-6 col-lg-4 mb-4">  
+      <div class="video-thumbnail">
           <a href="video.html?id=${video.id}">
-            <img src="images/placeholder-thumbnail.jpg" alt="${video.title}" />
+            <img src="images/placeholder-thumbnail.jpg" alt="${
+              video.title
+            }" class="img img-responsive"/>
             <div class="video-duration">Video</div>
           </a>
         </div>
@@ -51,6 +54,7 @@ function displayVideos(videos) {
           <p class="video-publisher">
             By ${video.uploaderName || "Unknown"}
           </p>
+        </div>
         </div>
       `;
 
