@@ -84,7 +84,4 @@ VidShare is a cloud-native video sharing platform that allows users to upload, v
 - Add support for video analytics (views, likes, etc.).
 - Improve search functionality with filters and sorting.
 
----
-tibi Femi** - [GitHub Profile](https://github.com/your-username)
 
-```
